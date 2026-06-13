@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Gnomon",
+  "description": "AI token usage prediction and prompt optimization assistant.",
+  "version": "0.1.0",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Gnomon"
+  },
+  "background": {
+    "service_worker": "assets/service-worker.js",
+    "type": "module"
+  },
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["https://chatgpt.com/*", "https://chat.openai.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*"],
+      "js": ["assets/content-script.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_page": "options.html"
+}
