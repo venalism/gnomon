@@ -43,6 +43,15 @@ test("renders token analysis on a mock ChatGPT page", async ({ browserName: _bro
     await expect(page.locator(".gnomon-root")).toContainText("Gnomon");
     await expect(page.locator(".gnomon-root")).toContainText("Score");
     await page.getByRole("button", { name: "Expand" }).click();
+    const expandedWidget = page.locator(".gnomon-card-expanded");
+    await expect(expandedWidget).toBeVisible();
+    const expandedBox = await expandedWidget.boundingBox();
+    const viewport = page.viewportSize();
+    expect(expandedBox).not.toBeNull();
+    expect(viewport).not.toBeNull();
+    expect(expandedBox!.y).toBeGreaterThanOrEqual(0);
+    expect(expandedBox!.y + expandedBox!.height).toBeLessThanOrEqual(viewport!.height + 1);
+    expect(expandedBox!.width).toBeLessThanOrEqual(viewport!.width);
     await page.getByRole("button", { name: "Optimize Prompt" }).click();
     await expect(page.locator(".gnomon-root")).toContainText("Optimized");
   } finally {

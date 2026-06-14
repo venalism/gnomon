@@ -17,6 +17,20 @@ export const widgetStyles = `
   box-shadow: 0 18px 48px rgba(15, 23, 42, 0.18);
   backdrop-filter: blur(14px);
 }
+.gnomon-card-expanded {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  width: min(448px, 100vw);
+  height: 100vh;
+  height: 100dvh;
+  flex-direction: column;
+  border-width: 0 0 0 1px;
+  border-radius: 0;
+  box-shadow: -18px 0 48px rgba(15, 23, 42, 0.22);
+}
 .gnomon-header {
   display: flex;
   align-items: center;
@@ -54,12 +68,29 @@ export const widgetStyles = `
 .gnomon-toggle:hover {
   background: rgba(15, 23, 42, 0.08);
 }
+.gnomon-card-expanded .gnomon-header {
+  flex-shrink: 0;
+  padding: 14px 16px;
+}
+.gnomon-content {
+  min-height: 0;
+}
+.gnomon-card-expanded .gnomon-content {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
 .gnomon-compact {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   padding: 10px 12px;
   font-size: 12px;
+}
+.gnomon-card-expanded .gnomon-compact,
+.gnomon-card-expanded .gnomon-section {
+  padding-right: 16px;
+  padding-left: 16px;
 }
 .gnomon-pill {
   display: inline-flex;
@@ -123,6 +154,10 @@ export const widgetStyles = `
   padding: 10px 12px;
   border-top: 1px solid rgba(148, 163, 184, 0.22);
 }
+.gnomon-card-expanded .gnomon-actions {
+  flex-shrink: 0;
+  padding: 14px 16px;
+}
 .gnomon-button {
   border: 0;
   border-radius: 6px;
@@ -152,10 +187,25 @@ export const widgetStyles = `
   font-size: 12px;
   white-space: pre-wrap;
 }
+.gnomon-card-expanded .gnomon-textbox {
+  max-height: 160px;
+}
 .gnomon-empty {
   padding: 12px;
   color: #64748b;
   font-size: 12px;
+}
+@media (max-width: 520px) {
+  .gnomon-root {
+    right: 12px;
+    bottom: 24px;
+    width: min(360px, calc(100vw - 24px));
+  }
+  .gnomon-card-expanded {
+    left: 0;
+    width: 100vw;
+    border-left-width: 0;
+  }
 }
 @media (prefers-color-scheme: dark) {
   .gnomon-root { color: #f8fafc; }
@@ -163,6 +213,9 @@ export const widgetStyles = `
     border-color: rgba(71, 85, 105, 0.65);
     background: rgba(15, 23, 42, 0.96);
     box-shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
+  }
+  .gnomon-card-expanded {
+    box-shadow: -18px 0 48px rgba(0, 0, 0, 0.42);
   }
   .gnomon-header,
   .gnomon-section,
