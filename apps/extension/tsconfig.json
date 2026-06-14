@@ -2,8 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "types": ["chrome", "node"],
-    "noEmit": true,
-    "baseUrl": "."
+    "noEmit": true
   },
   "include": [
     "src",
